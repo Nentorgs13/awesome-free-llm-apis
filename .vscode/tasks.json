@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Cerebnation: Start local server",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "-u",
+        "-m",
+        "http.server",
+        "8000",
+        "--directory",
+        "${workspaceFolder}/app"
+      ],
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "cerebnation",
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^$",
+          "endsPattern": "^Serving HTTP on .*port 8000"
+        }
+      }
+    }
+  ]
+}
