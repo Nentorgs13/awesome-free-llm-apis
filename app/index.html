@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#07090b" />
+  <title>Cerebnation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <canvas id="brainCanvas" aria-label="Interactive brain map"></canvas>
+
+    <aside class="chat-sidebar" id="chatSidebar">
+      <div class="sidebar-brand"><h1>Cerebnation</h1></div>
+      <div class="sidebar-toolbar">
+        <div class="core-system">
+          <button class="core-switcher" id="coreSwitcher" aria-expanded="false"><span id="activeCoreName">Core</span><span class="app-icon icon-arrow-down" aria-hidden="true"></span></button>
+        <div class="core-menu" id="coreMenu" aria-hidden="true">
+          <button class="core-option active" data-core="Core">Core</button>
+          <button class="core-option" data-core="ChatCN">ChatCN</button>
+          <button class="core-option" data-core="NeuroCLV">NeuroCLV</button>
+        </div>
+      </div>
+        <button class="empty-action search-action" data-empty-action="search" aria-label="Search" title="Search"><span class="app-icon icon-search" aria-hidden="true"></span></button>
+        <button class="empty-action tools-action" data-empty-action="tools" aria-label="Notifications" title="Notifications"><span class="app-icon icon-bell" aria-hidden="true"></span></button>
+      </div>
+      <button class="new-chat" id="newChat"><span class="app-icon icon-add" aria-hidden="true"></span>New core</button>
+      <p class="sidebar-section-title">CORES</p>
+      <nav class="kernels-list" aria-label="Cores">
+        <button class="kernel-item active" data-kernel="Main core"><span>Main core</span><i class="kernel-icon icon-main"></i></button>
+        <button class="kernel-item" data-kernel="Today's plan"><span>Today's plan</span><i class="kernel-icon icon-plan"></i></button>
+        <button class="kernel-item" data-kernel="Cerebnation project"><span>Cerebnation project</span><i class="kernel-icon icon-project"></i></button>
+        <button class="kernel-item" data-kernel="Weekly ideas"><span>Weekly ideas</span><i class="kernel-icon icon-ideas"></i></button>
+        <button class="kernel-item" data-kernel="Personal core"><span>Personal core</span><i class="kernel-icon icon-personal"></i></button>
+      </nav>
+      <div class="account-menu" id="accountMenu" aria-hidden="true">
+        <button data-account-action="subscription">Subscription</button>
+        <button data-account-action="settings">Settings</button>
+        <button class="sign-out" data-account-action="signout">Sign out</button>
+      </div>
+      <div class="account-row">
+        <button class="account-button" id="accountButton"><span class="account-avatar">U</span><span>My account</span></button>
+        <button class="account-clear" id="clearCore" aria-label="Clear current core" title="Clear current core"><span class="app-icon icon-black-hole" aria-hidden="true"></span></button>
+      </div>
+    </aside>
+    <button class="mobile-menu" id="mobileMenu" aria-label="Open cores">☰</button>
+    <header class="topbar">
+      <p id="modeLabel">Task map</p>
+      <div class="view-controls" aria-label="Map zoom">
+        <button class="icon-button active" id="rotateToggle" aria-label="Rotation mode" title="Rotation mode">↻</button>
+        <button class="icon-button" id="zoomOut" aria-label="Zoom out">−</button>
+        <button class="icon-button" id="resetView" aria-label="Reset view">⌾</button>
+        <button class="icon-button" id="zoomIn" aria-label="Zoom in">+</button>
+      </div>
+    </header>
+
+    <aside class="side-panel" id="sidePanel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">SELECTED</p><h2 id="nodeTitle">Cerebnation</h2></div>
+        <button class="close-button" id="closePanel" aria-label="Close">×</button>
+      </div>
+      <p class="node-description" id="nodeDescription">Connects your projects, tasks, and next steps in one living map.</p>
+      <form class="node-name-form" id="nodeNameForm">
+        <label for="nodeName">Neuron name</label>
+        <div><input id="nodeName" maxlength="28" placeholder="Name this neuron" /><button type="submit" aria-label="Save neuron name">✓</button></div>
+      </form>
+      <div class="stat-row"><span>Connections</span><strong id="connectionCount">6</strong></div>
+      <div class="stat-row"><span>Synapses</span><strong id="taskCount">18</strong></div>
+      <div class="assistant-note" id="assistantNote">Start with the node nearest the center: it has the most context.</div>
+      <button class="secondary-button" id="askAi">Ask Cerebnation</button>
+    </aside>
+
+    <section class="mini-chat" aria-label="Cerebnation mini chat">
+      <div class="mini-chat-heading"><div><div class="chat-title-row"><button class="chat-action" id="focusChat" aria-label="Focus chat" title="Focus chat"><span class="app-icon icon-dialog" aria-hidden="true"></span></button><p>CORE CHAT</p></div><select id="miniKernelSelect" aria-label="Choose a core"><option>Main core</option><option>Today's plan</option><option>Cerebnation project</option><option>Weekly ideas</option><option>Personal core</option></select></div></div>
+      <div class="mini-chat-log" id="miniChatLog"><p class="mini-message bot">I hold the context of this map.</p></div>
+      <form class="mini-chat-form" id="miniChatForm"><input id="miniChatInput" maxlength="120" placeholder="Message Cerebnation" /><button type="submit" aria-label="Send"><span class="app-icon icon-arrow-up" aria-hidden="true"></span></button></form>
+    </section>
+
+    <section class="task-dock">
+      <div class="dock-title"><span class="live-dot"></span><span id="dockText">6 neurons · 18 synapses</span></div>
+      <form id="taskForm" class="task-form">
+        <label class="sr-only" for="taskProject">Neuron</label>
+        <div class="project-select"><select id="taskProject"></select><span class="app-icon icon-arrow-down" aria-hidden="true"></span></div>
+        <label class="sr-only" for="taskInput">New synapse</label>
+        <input id="taskInput" maxlength="48" placeholder="Add a synapse" />
+        <button class="add-button" type="submit" aria-label="Add synapse">+</button>
+      </form>
+    </section>
+
+    <div class="hint" id="hint">Rotate the brain · zoom in to explore more neurons</div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

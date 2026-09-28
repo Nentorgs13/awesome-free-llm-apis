@@ -1,0 +1,8 @@
+{
+  "name": "Cerebnation",
+  "short_name": "Cerebnation",
+  "display": "standalone",
+  "background_color": "#07090b",
+  "theme_color": "#07090b",
+  "lang": "ru"
+}
